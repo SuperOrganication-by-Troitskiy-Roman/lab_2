@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Калькулятор";
+}
+
+<h2>Калькулятор</h2>
+
+<form id="calculator">
+    <input type="number" id="num1" name="num1" placeholder="Первое число" required />
+    <input type="number" id="num2" name="num2" placeholder="Второе число" required />
+    <select id="operation" name="operation">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <button type="submit">Вычислить</button>
+</form>
+
+<h3>Результат: <span id="result"></span></h3>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#calculator').on('submit', function (e) {
+            e.preventDefault(); // предотвращаем стандартное поведение формы
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Calculate", "Calculator")',
+                data: $(this).serialize(),
+                success: function (data) {
+                    $('#result').text(data.result);
+                },
+                error: function (xhr) {
+                    $('#result').text(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,11 @@
+﻿#calculator {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin: auto;
+}
+
+input, select, button {
+    margin: 5px 0;
+    padding: 10px;
+}
